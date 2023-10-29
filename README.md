@@ -1,3 +1,3 @@
 # talentpool
-talentpool contain project files 
-its me mishal firdous 
+talentpool contain project files.
+its me mishal firdous working on this.
