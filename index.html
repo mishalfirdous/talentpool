@@ -31,32 +31,6 @@
         <div class="experince-sec">
           <div class="container">
             <h2>Experince</h2>
-            <button id="addButton">Add</button>
-            <div class="experiences">
-              <div id="experienceList"></div>
-            </div>
-          </div>
-
-          <div id="experienceForm" class="form">
-            <h2>Add Experience</h2>
-            <label for="companyName"></label>
-            <input
-              type="text"
-              id="companyName"
-              placeholder="Company Name:"
-              required/>
-            <label for="startDate"></label>
-            <input type="date" id="startDate" required />
-            <label for="endDate"></label>
-            <input type="date" id="endDate" required />
-            <label for="description"></label>
-            <textarea
-              id="description"
-              rows="4"
-              placeholder="Description"
-              required
-            ></textarea>
-            <button id="saveButton">Save</button>
           </div>
         </div>
       </div>
@@ -85,38 +59,7 @@
       </div>
     </div>
     <script>
-      const addButton = document.getElementById("addButton");
-      const experienceForm = document.getElementById("experienceForm");
-      const saveButton = document.getElementById("saveButton");
-      const experienceList = document.getElementById("experienceList");
-
-      addButton.addEventListener("click", () => {
-        experienceForm.style.display = "block";
-      });
-
-      saveButton.addEventListener("click", () => {
-        const companyName = document.getElementById("companyName").value;
-        const startDate = document.getElementById("startDate").value;
-        const endDate = document.getElementById("endDate").value;
-        const description = document.getElementById("description").value;
-
-        const experienceEntry = document.createElement("div");
-        experienceEntry.classList.add("experience-entry");
-        experienceEntry.innerHTML = `
-       <h2> <strong>${companyName}</strong><br></h2>
-        ${startDate} - ${endDate} <br>
-        ${description}
-    `;
-
-        experienceList.appendChild(experienceEntry);
-
-        document.getElementById("companyName").value = "";
-        document.getElementById("startDate").value = "";
-        document.getElementById("endDate").value = "";
-        document.getElementById("description").value = "";
-
-        experienceForm.style.display = "none";
-      });
+      
     </script>
   </body>
   <footer class="linkedIn">

@@ -79,16 +79,17 @@
       </div>
     </div>
     <script>
-        const addButton = document.getElementById("addButton");
-        const experienceForm = document.getElementById("experienceForm");
-        const saveButton = document.getElementById("saveButton");
-        const experienceList = document.getElementById("experienceList");
+      document.addEventListener("DOMContentLoaded", function () {
+  const addButton = document.getElementById("addButton");
+  const experienceForm = document.getElementById("experienceForm");
+  const saveButton = document.getElementById("saveButton");
+  const experienceList = document.getElementById("experienceList");
 
-addButton.addEventListener("click", () => {
+  addButton.addEventListener("click", function () {
     experienceForm.style.display = "block";
-});
+  });
 
-saveButton.addEventListener("click", () => {
+  saveButton.addEventListener("click", function () {
     const companyName = document.getElementById("companyName").value;
     const startDate = document.getElementById("startDate").value;
     const endDate = document.getElementById("endDate").value;
@@ -110,7 +111,9 @@ saveButton.addEventListener("click", () => {
     document.getElementById("description").value = "";
 
     experienceForm.style.display = "none";
-});</script>
+  });
+});
+    </script>
   </body>
   <footer class="linkedIn">
     <h3>
