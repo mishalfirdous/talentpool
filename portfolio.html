@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div id="experienceForm" class="form">
+    <div id="experienceForm" class="form" action="index.html">
         <h2>Add Experience</h2>
         <label for="companyName"></label>
         <input type="text" id="companyName" placeholder="Company Name:" required>
@@ -102,6 +102,7 @@
         ${startDate} - ${endDate} <br>
         ${description}
     `;
+    
 
     experienceList.appendChild(experienceEntry);
 
@@ -112,6 +113,8 @@
 
     experienceForm.style.display = "none";
   });
+
+  
 });
     </script>
   </body>
