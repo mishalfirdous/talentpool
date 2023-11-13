@@ -39,9 +39,11 @@ header {
 #experienceList {
   padding: 20px;
 }
+.login {
+  display: inline-block;
+}
 
-.login h3,
-a {
+.login a {
   cursor: pointer;
   color: blue;
   border: none;
