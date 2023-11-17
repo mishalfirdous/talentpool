@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="stylesheet.css" />
     <header>
       <div class="login">
         <h3><a href="index.html">Go Back</a></h3>
@@ -11,26 +11,26 @@
     </header>
   </head>
   <body>
-    <div class="container">
+    <div class="signup-container">
       <form id="registrationForm">
         <h1>Registration form</h1>
         <!--username feild -->
         <div class="input-control">
           <label for="name">User-name</label>
-          <input id="name" name="name" type="text" required />
+          <input id="name" name="name" type="text" />
           <span class="error" id="nameError"></span>
         </div>
         <!--email feild -->
 
         <div class="input-control">
           <label for="email">User-email</label>
-          <input id="email" name="email" type="email" required />
+          <input id="email" name="email" type="email" />
           <span class="error" id="emailError"></span>
         </div>
         <!--password feild -->
         <div class="input-control">
           <label for="password">Password</label>
-          <input id="password" name="password" type="password" required />
+          <input id="password" name="password" type="password" />
           <span class="error" id="passwordError"></span>
         </div>
         <button type="submit" id="submitBtn">submit</button>
