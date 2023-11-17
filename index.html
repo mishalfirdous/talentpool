@@ -7,10 +7,12 @@
     <header>
       <div class="login">
         <ul>
-          <li><a href="portfolio.html">Portfolio</a></li>
           <li><a href="signup.html">login</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
         </ul>
       </div>
+    </header>
+  </head>
     </header>
   </head>
   <body>
@@ -32,8 +34,10 @@
           </p>
         </div>
         <div class="experince-sec">
+          
           <div class="container">
             <h2>Experince</h2>
+            <div id="experienceList"></div>
           </div>
         </div>
       </div>
@@ -61,7 +65,33 @@
         </div>
       </div>
     </div>
-    <script></script>
+    <script>
+      
+      function displayLocalStorage () {
+        const experienceList = document.getElementById("experienceList");
+        console.log(experienceList);
+       const localData =  JSON.parse(localStorage.getItem("experiencedata"));
+       localData.forEach((item)=>{
+       //console.log(item.companyName);
+        const parsItem = JSON.parse(item);
+        
+         const experienceEntry = document.createElement("p");
+        experienceEntry.classList.add("experience-entry");
+        experienceEntry.innerHTML = `
+       <h2> <strong>${parsItem.companyName}</strong><br></h2>
+        ${parsItem.startDate} - ${parsItem.endDate} <br>
+        ${parsItem.description}
+
+    `;
+    
+    experienceList.appendChild(experienceEntry);
+       })
+       
+      }
+      displayLocalStorage();
+
+        
+    </script>
   </body>
   <footer class="linkedIn">
     <h3>
