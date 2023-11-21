@@ -7,8 +7,8 @@
     <header>
       <div class="login">
         <ul>
-          <li><a href="index.html">Home</a></li>
           <li><a href="signup.html">login</a></li>
+          <li><a href="edit portfolio.html">edit Portfolio</a></li>
         </ul>
       </div>
     </header>
@@ -34,38 +34,7 @@
         <div class="experince-sec">
           <div class="container">
             <h2>Experince</h2>
-            <button id="addButton">Add</button>
-            <div class="experiences">
-              <div id="experienceList"></div>
-            </div>
-          </div>
-
-          <div
-            id="experienceForm"
-            class="form"
-            action="index.html"
-            method="POST"
-          >
-            <h2>Add Experience</h2>
-            <label for="companyName"></label>
-            <input
-              type="text"
-              id="companyName"
-              placeholder="Company Name:"
-              required
-            />
-            <label for="startDate"></label>
-            <input type="date" id="startDate" required />
-            <label for="endDate"></label>
-            <input type="date" id="endDate" required />
-            <label for="description"></label>
-            <textarea
-              id="description"
-              rows="4"
-              placeholder="Description"
-              required
-            ></textarea>
-            <button id="saveButton">Save</button>
+            <div id="experienceList"></div>
           </div>
         </div>
       </div>
@@ -93,60 +62,33 @@
         </div>
       </div>
     </div>
+    <footer class="linkedIn">
+      <h3>
+        <a href="https://www.linkedin.com/in/mishal-firdous-b99a0a131"
+          >LinkedIn</a
+        >
+      </h3>
+    </footer>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const addButton = document.getElementById("addButton");
-        const experienceForm = document.getElementById("experienceForm");
-        const saveButton = document.getElementById("saveButton");
+      function displayLocalStorage() {
         const experienceList = document.getElementById("experienceList");
-        //store data in localStorage
-        const dataValue =
-          JSON.parse(localStorage.getItem("experiencedata")) || [];
+        const localData = JSON.parse(localStorage.getItem("experiencedata"));
+        localData.forEach((item) => {
+          const parsItem = JSON.parse(item);
 
-        addButton.addEventListener("click", function () {
-          experienceForm.style.display = "block";
-        });
-
-        saveButton.addEventListener("click", function () {
-          const companyName = document.getElementById("companyName").value;
-          const startDate = document.getElementById("startDate").value;
-          const endDate = document.getElementById("endDate").value;
-          const description = document.getElementById("description").value;
-
-          const experienceEntry = document.createElement("div");
+          const experienceEntry = document.createElement("p");
           experienceEntry.classList.add("experience-entry");
           experienceEntry.innerHTML = `
-       <h2> <strong>${companyName}</strong><br></h2>
-        ${startDate} - ${endDate} <br>
-        ${description}
+       <h2> <strong>${parsItem.companyName}</strong><br></h2>
+        ${parsItem.startDate} - ${parsItem.endDate} <br>
+        ${parsItem.description}
+
     `;
 
-          const experienceData = {
-            companyName,
-            startDate,
-            endDate,
-            description,
-          };
-
-          dataValue.push(JSON.stringify(experienceData));
-          localStorage.setItem("experiencedata", JSON.stringify(dataValue));
           experienceList.appendChild(experienceEntry);
-
-          document.getElementById("companyName").value = "";
-          document.getElementById("startDate").value = "";
-          document.getElementById("endDate").value = "";
-          document.getElementById("description").value = "";
-
-          experienceForm.style.display = "none";
         });
-      });
+      }
+      displayLocalStorage();
     </script>
   </body>
-  <footer class="linkedIn">
-    <h3>
-      <a href="https://www.linkedin.com/in/mishal-firdous-b99a0a131"
-        >LinkedIn</a
-      >
-    </h3>
-  </footer>
 </html>
