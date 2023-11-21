@@ -112,15 +112,6 @@
           const startDate = document.getElementById("startDate").value;
           const endDate = document.getElementById("endDate").value;
           const description = document.getElementById("description").value;
-
-          const experienceEntry = document.createElement("div");
-          experienceEntry.classList.add("experience-entry");
-          experienceEntry.innerHTML = `
-       <h2> <strong>${companyName}</strong><br></h2>
-        ${startDate} - ${endDate} <br>
-        ${description}
-    `;
-
           const experienceData = {
             companyName,
             startDate,
@@ -130,8 +121,8 @@
 
           dataValue.push(JSON.stringify(experienceData));
           localStorage.setItem("experiencedata", JSON.stringify(dataValue));
-
-          experienceList.appendChild(experienceEntry);
+          
+          displayLocalStorage();
 
           document.getElementById("companyName").value = "";
           document.getElementById("startDate").value = "";
@@ -141,6 +132,25 @@
           experienceForm.style.display = "none";
         });
       });
+      function displayLocalStorage() {
+        const experienceList = document.getElementById("experienceList");
+        const localData = JSON.parse(localStorage.getItem("experiencedata"));
+        localData.forEach((item) => {
+          const parsItem = JSON.parse(item);
+
+          const experienceEntry = document.createElement("p");
+          experienceEntry.classList.add("experience-entry");
+          experienceEntry.innerHTML = `
+       <h2> <strong>${parsItem.companyName}</strong><br></h2>
+        ${parsItem.startDate} - ${parsItem.endDate} <br>
+        ${parsItem.description}
+
+    `;
+
+          experienceList.appendChild(experienceEntry);
+        });
+      }
+      displayLocalStorage();
     </script>
   </body>
   <footer class="linkedIn">
