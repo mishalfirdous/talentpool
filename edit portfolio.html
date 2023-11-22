@@ -100,8 +100,9 @@
         >
       </h3>
     </footer>
-    <script src="./DisplayLocalStorageData.js"></script>
+    <script src="./displayLocalStorageData.js"></script>
     <script>
+      displayLocalStorageData();
       document.addEventListener("DOMContentLoaded", function () {
         const addButton = document.getElementById("addButton");
         const experienceForm = document.getElementById("experienceForm");
@@ -133,7 +134,7 @@
           dataValue.push(JSON.stringify(experienceData));
           localStorage.setItem("experiencedata", JSON.stringify(dataValue));
 
-          DisplayLocalStorageData();
+          displayLocalStorageData();
 
           document.getElementById("companyName").value = "";
           document.getElementById("startDate").value = "";
