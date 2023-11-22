@@ -100,6 +100,49 @@
         >
       </h3>
     </footer>
-    <script src="DisplayLocalStorageData.js"></script>
+    <script src="./DisplayLocalStorageData.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const addButton = document.getElementById("addButton");
+        const experienceForm = document.getElementById("experienceForm");
+        const saveButton = document.getElementById("saveButton");
+        const experienceList = document.getElementById("experienceList");
+        //store data in localStorage
+        const dataValue =
+          JSON.parse(localStorage.getItem("experiencedata")) || [];
+
+        addButton.addEventListener("click", function () {
+          event.preventDefault();
+          experienceForm.style.display = "block";
+        });
+
+        saveButton.addEventListener("click", function () {
+          event.preventDefault();
+          const companyName = document.getElementById("companyName").value;
+          const startDate = document.getElementById("startDate").value;
+          const endDate = document.getElementById("endDate").value;
+          const description = document.getElementById("description").value;
+
+          const experienceData = {
+            companyName,
+            startDate,
+            endDate,
+            description,
+          };
+
+          dataValue.push(JSON.stringify(experienceData));
+          localStorage.setItem("experiencedata", JSON.stringify(dataValue));
+
+          DisplayLocalStorageData();
+
+          document.getElementById("companyName").value = "";
+          document.getElementById("startDate").value = "";
+          document.getElementById("endDate").value = "";
+          document.getElementById("description").value = "";
+
+          experienceForm.style.display = "none";
+        });
+      });
+    </script>
   </body>
 </html>
