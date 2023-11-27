@@ -102,7 +102,6 @@
     </footer>
     <script src="./displayLocalStorageData.js"></script>
     <script>
-      displayLocalStorageData();
       document.addEventListener("DOMContentLoaded", function () {
         const addButton = document.getElementById("addButton");
         const experienceForm = document.getElementById("experienceForm");
@@ -123,7 +122,7 @@
           const startDate = document.getElementById("startDate").value;
           const endDate = document.getElementById("endDate").value;
           const description = document.getElementById("description").value;
-
+          //object creation
           const experienceData = {
             companyName,
             startDate,
@@ -143,6 +142,7 @@
 
           experienceForm.style.display = "none";
         });
+        displayLocalStorageData();
       });
     </script>
   </body>
