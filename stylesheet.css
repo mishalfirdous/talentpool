@@ -47,11 +47,11 @@ header {
 #experienceList {
   padding: 20px;
 }
-.login {
+.navBar {
   display: inline-block;
 }
 
-.login a {
+.navBar a {
   cursor: pointer;
   color: blue;
   border: none;
@@ -65,14 +65,14 @@ header {
 .personal-info {
   width: 70%;
 }
-.about-sec {
+.about-info {
   width: 100%;
   height: 200px;
   border: 2px solid lightgray;
   background-color: white;
   border-radius: 5px;
 }
-.about-sec p,
+.about-info p,
 h2 {
   color: black;
   font-size: 17px;
@@ -80,7 +80,7 @@ h2 {
   padding-right: 20px;
 }
 
-.experince-sec {
+.experience-info {
   width: 100%;
   border: 2px solid lightgray;
   background-color: white;
@@ -116,21 +116,13 @@ h2 {
   margin-left: auto;
   margin-right: auto;
 }
-
-ul.a {
-  list-style-type: underline;
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  text-align: left;
-}
 ul li {
   text-decoration: none;
   display: inline-block;
   padding: 20px;
 }
 
-.linkedIn {
+.SocialAcct {
   margin-top: 10px;
   padding: 10px;
   border: 2px solid lightgray;
@@ -139,7 +131,7 @@ ul li {
   text-decoration: none;
 }
 
-.linkedIn a {
+.SocialAcct a {
   text-decoration: none;
 }
 .form input {

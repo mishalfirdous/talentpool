@@ -4,19 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="stylesheet.css" />
+  </head>
+  <body>
     <header>
-      <div class="login">
+      <div class="navBar">
         <ul>
           <li><a href="portfolio.html">Portfolio</a></li>
           <li><a href="signup.html">login</a></li>
         </ul>
       </div>
     </header>
-  </head>
-  <body>
+
     <div class="main-container">
       <div class="personal-info">
-        <div class="about-sec">
+        <div class="about-info">
           <h2>About</h2>
           <p>
             its Mishal firdous here, i am a software engineer, Previsiosly
@@ -31,7 +32,7 @@
             applications and systems that drive modern society.
           </p>
         </div>
-        <div class="experince-sec">
+        <div class="experience-info">
           <div class="container">
             <h2>Experince</h2>
             <button id="addButton">Add</button>
@@ -40,7 +41,7 @@
             </div>
           </div>
 
-          <div
+          <form
             id="experienceForm"
             class="form"
             action="index.html"
@@ -66,15 +67,15 @@
               required
             ></textarea>
             <button id="saveButton">Save</button>
-          </div>
+          </form>
         </div>
       </div>
 
       <div class="side-bar">
         <div class="avatar">
-          <img src="assets/avatar.jpeg" />
+          <img src="assets/avatar.jpeg" alt="profile image" />
           <h2>Mishal Firdous</h2>
-          <ul class="a">
+          <ul>
             <li>
               <label for="file">Wordpress, Wix, Shopify </label>
               <progress id="file" value="90" max="100">90%</progress>
@@ -93,57 +94,13 @@
         </div>
       </div>
     </div>
-    <footer class="linkedIn">
+    <footer class="SocialAcct">
       <h3>
         <a href="https://www.linkedin.com/in/mishal-firdous-b99a0a131"
           >LinkedIn</a
         >
       </h3>
     </footer>
-    <script src="./displayLocalStorageData.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const addButton = document.getElementById("addButton");
-        const experienceForm = document.getElementById("experienceForm");
-        const saveButton = document.getElementById("saveButton");
-        const experienceList = document.getElementById("experienceList");
-        //store data in localStorage
-        const dataValue =
-          JSON.parse(localStorage.getItem("experiencedata")) || [];
-
-        addButton.addEventListener("click", function () {
-          event.preventDefault();
-          experienceForm.style.display = "block";
-        });
-
-        saveButton.addEventListener("click", function () {
-          event.preventDefault();
-          const companyName = document.getElementById("companyName").value;
-          const startDate = document.getElementById("startDate").value;
-          const endDate = document.getElementById("endDate").value;
-          const description = document.getElementById("description").value;
-          //object creation
-          const experienceData = {
-            companyName,
-            startDate,
-            endDate,
-            description,
-          };
-
-          dataValue.push(JSON.stringify(experienceData));
-          localStorage.setItem("experiencedata", JSON.stringify(dataValue));
-
-          displayLocalStorageData();
-
-          document.getElementById("companyName").value = "";
-          document.getElementById("startDate").value = "";
-          document.getElementById("endDate").value = "";
-          document.getElementById("description").value = "";
-
-          experienceForm.style.display = "none";
-        });
-        displayLocalStorageData();
-      });
-    </script>
+    <script src="./javascript.js"></script>
   </body>
 </html>
