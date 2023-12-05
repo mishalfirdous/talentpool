@@ -68,7 +68,7 @@ label {
   margin-top: 20px;
 }
 
-.SocialAcct {
+.socialAccount {
   margin-top: 10px;
   padding: 10px;
   border: 2px solid lightgray;
@@ -77,7 +77,7 @@ label {
   text-decoration: none;
 }
 
-.SocialAcct a {
+.socialAccount a {
   text-decoration: none;
 }
 

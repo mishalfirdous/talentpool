@@ -1,49 +1,161 @@
+//store data in local storage through this function
 function fetchLocalStorageData() {
   const experienceList = document.getElementById("experienceList");
-  const localData = JSON.parse(localStorage.getItem("experiencedata"));
-  localData.forEach((item) => {
-    const parsItem = JSON.parse(item);
+  experienceList.innerHTML = ""; // Clear previous content
 
-    const experienceEntry = document.createElement("p");
+  const localData = JSON.parse(localStorage.getItem("experiencedata")) || [];
+  localData.forEach((singleExperience) => {
+    const experienceEntry = document.createElement("div");
     experienceEntry.classList.add("experience-entry");
-    experienceEntry.innerHTML = `
-   <h2> <strong>${parsItem.companyName}</strong><br></h2>
-    ${parsItem.startDate} - ${parsItem.endDate} <br>
-    ${parsItem.description}
 
-`;
+    //edit entity start over  here
+    const editButton = document.createElement("button");
+    editButton.innerText = "edit";
+    editButton.addEventListener("click", () =>
+      editEntry(singleExperience, experienceEntry)
+    );
+
+    //edit function end here
+
+    //delete entity here
+    const deleteButton = document.createElement("button"); // create a delete button and assign variable to the
+    deleteButton.innerText = "Delete"; // inner text is delete button inside the button
+    deleteButton.addEventListener("click", () =>
+      deleteEntry(singleExperience.id)
+    );
+
+    experienceEntry.innerHTML = `
+      <h2><strong>${singleExperience.companyName}</strong><br></h2>
+      <p>${singleExperience.startDate} - ${singleExperience.endDate} </p>
+      <p>${singleExperience.description}</p>     
+    `;
+
+    experienceEntry.appendChild(editButton);
+    experienceEntry.appendChild(deleteButton);
     experienceList.appendChild(experienceEntry);
   });
 }
+
+//EDIT FUNCTION
+function editEntry(singleExperience, experienceEntry) {
+  const form = document.createElement("form");
+  //form.className = "editJobExperience";
+
+  const companyNameInput = document.createElement("input");
+  companyNameInput.type = "text";
+  companyNameInput.value = singleExperience.companyName;
+
+  const startDateInput = document.createElement("input");
+  startDateInput.type = "date";
+  startDateInput.value = singleExperience.startDate;
+
+  const endDateInput = document.createElement("input");
+  endDateInput.type = "date";
+  endDateInput.value = singleExperience.endDate;
+
+  const innerContainer = document.createElement("div");
+  //innerContainer.className = "jobDescription";
+
+  const descriptionInput = document.createElement("textarea");
+  descriptionInput.rows = 5;
+  descriptionInput.value = singleExperience.description;
+
+  const saveButton = document.createElement("button");
+  saveButton.type = "submit";
+  saveButton.innerHTML = "Save";
+  saveButton.onclick = (event) =>
+    updateExperience(
+      singleExperience,
+      companyNameInput.value,
+      startDateInput.value,
+      endDateInput.value,
+      descriptionInput.value,
+      form,
+      experienceEntry,
+      event
+    );
+
+  form.appendChild(companyNameInput);
+  form.appendChild(startDateInput);
+  form.appendChild(endDateInput);
+  innerContainer.appendChild(descriptionInput);
+  innerContainer.appendChild(saveButton);
+  form.appendChild(innerContainer);
+
+  experienceEntry.replaceWith(form);
+}
+//save button function
+function updateExperience(
+  singleExperience,
+  updatedCompanyName,
+  updatedStartDate,
+  updatedEndDate,
+  updatedDescription,
+  form,
+  experienceEntry,
+  event
+) {
+  event.preventDefault();
+
+  singleExperience.companyName = updatedCompanyName;
+  singleExperience.startDate = updatedStartDate;
+  singleExperience.endDate = updatedEndDate;
+  singleExperience.description = updatedDescription;
+
+  let experiences = JSON.parse(localStorage.getItem("experiencedata"));
+  const index = experiences.findIndex(
+    (experience) => experience.id === singleExperience.id
+  );
+  experiences[index] = singleExperience;
+  localStorage.setItem("experiencedata", JSON.stringify(experiences));
+
+  fetchLocalStorageData();
+  form.replaceWith(experienceEntry);
+}
+
+//delete function start over here
+function deleteEntry(id) {
+  let experiences = JSON.parse(localStorage.getItem("experiencedata"));
+  const index = experiences.findIndex((experience) => experience.id === id);
+  if (index !== -1) {
+    experiences.splice(index, 1);
+    localStorage.setItem("experiencedata", JSON.stringify(experiences));
+  }
+  fetchLocalStorageData();
+}
+
+//delete function end here
 
 document.addEventListener("DOMContentLoaded", function () {
   const addButton = document.getElementById("addButton");
   const experienceForm = document.getElementById("experienceForm");
   const saveButton = document.getElementById("saveButton");
-  const experienceList = document.getElementById("experienceList");
-  //store data in localStorage
-  const dataValue = JSON.parse(localStorage.getItem("experiencedata")) || [];
 
-  addButton.addEventListener("click", function () {
+  addButton.addEventListener("click", function (event) {
     event.preventDefault();
     experienceForm.style.display = "block";
   });
 
-  saveButton.addEventListener("click", function () {
+  saveButton.addEventListener("click", function (event) {
     event.preventDefault();
     const companyName = document.getElementById("companyName").value;
     const startDate = document.getElementById("startDate").value;
     const endDate = document.getElementById("endDate").value;
     const description = document.getElementById("description").value;
-    //object creation
+
+    //generate id
+    let id = Date.now() + Math.floor(Math.random() * 1000);
+
     const experienceData = {
+      id,
       companyName,
       startDate,
       endDate,
       description,
     };
 
-    dataValue.push(JSON.stringify(experienceData));
+    const dataValue = JSON.parse(localStorage.getItem("experiencedata")) || [];
+    dataValue.push(experienceData);
     localStorage.setItem("experiencedata", JSON.stringify(dataValue));
 
     fetchLocalStorageData();
@@ -55,87 +167,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     experienceForm.style.display = "none";
   });
-  fetchLocalStorageData();
+  fetchLocalStorageData(); // Call this function on initial load
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("registrationForm");
-  const nameInput = document.getElementById("name");
-  const emailInput = document.getElementById("email");
-  const passwordInput = document.getElementById("password");
-  const nameError = document.getElementById("nameError");
-  const emailError = document.getElementById("emailError");
-  const passwordError = document.getElementById("passwordError");
-  const successMessage = document.getElementById("successMessage");
+// Search filter functionality
+const searchInput = document.getElementById("searchInput"); // here we are get element by id that we mention up there
+searchInput.addEventListener("input", function () {
+  // that input id we put function on that poarticular seaerch
+  const filterValue = searchInput.value.toLowerCase();
+  const experienceEntries = document.querySelectorAll(".experience-entry");
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    let isValid = true;
-
-    // Name validation
-    if (nameInput.value.trim() === "") {
-      isValid = false;
-      nameError.textContent = "Name is required";
-      nameInput.style.borderColor = "red";
+  experienceEntries.forEach((entry) => {
+    const companyName = entry.querySelector("strong").textContent.toLowerCase();
+    if (companyName.includes(filterValue)) {
+      entry.style.display = "block"; // Show if matches the search criteria
     } else {
-      nameError.textContent = "";
-      nameInput.style.borderColor = "";
-    }
-
-    // Email validation
-    if (emailInput.value.trim() === "" || !emailInput.value.includes("@")) {
-      isValid = false;
-      emailError.textContent = 'Email is required and must contain "@"';
-      emailInput.style.borderColor = "red";
-    } else {
-      emailError.textContent = "";
-      emailInput.style.borderColor = "";
-    }
-
-    // Password validation
-    if (passwordInput.value.trim() === "" || passwordInput.value.length < 8) {
-      isValid = false;
-      passwordError.textContent =
-        "Password is required and must be at least 8 characters";
-      passwordInput.style.borderColor = "red";
-    } else {
-      passwordError.textContent = "";
-      passwordInput.style.borderColor = "";
-    }
-
-    if (isValid) {
-      // Prepare user data
-      const userData = {
-        name: nameInput.value.trim(),
-        email: emailInput.value.trim(),
-        password: passwordInput.value.trim(),
-      };
-
-      // Simulate API call
-      simulateAPI(userData);
-    } else {
-      successMessage.textContent = "";
+      entry.style.display = "none"; // Hide if doesn't match
     }
   });
-
-  // Simulate API call function
-  async function simulateAPI(userData) {
-    const registrationStatus = document.getElementById("registrationStatus");
-
-    const response = await fetch("https://dummyjson.com/users/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
-
-    if (response.status === 200) {
-      registrationStatus.textContent = "Registration successful";
-      registrationStatus.style.display = "block";
-    } else {
-      registrationStatus.textContent = "Registration failed";
-      registrationStatus.style.display = "block";
-    }
-  }
 });
