@@ -126,6 +126,8 @@ function deleteEntry(id) {
 
 //delete function end here
 
+//here is the function we created on add button
+
 document.addEventListener("DOMContentLoaded", function () {
   const addButton = document.getElementById("addButton");
   const experienceForm = document.getElementById("experienceForm");
