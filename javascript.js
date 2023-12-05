@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const saveButton = document.getElementById("saveButton");
 
   addButton.addEventListener("click", function (event) {
-    event.preventDefault();
+    event.preventDefault(); // it stop the default behaviour
     experienceForm.style.display = "block";
   });
 
