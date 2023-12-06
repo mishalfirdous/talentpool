@@ -166,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
   renderExperienceList(); // Call this function on initial load
 });
 fetchExperienceList();
+renderExperienceList();
 
 // Search filter
 const searchInput = document.getElementById("searchInput"); // here we are get element by id that we mention up there
