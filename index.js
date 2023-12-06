@@ -1,25 +1,25 @@
-//store data in local storage through this function
-function fetchLocalStorageData() {
+function fetchExperienceList() {
+  return JSON.parse(localStorage.getItem("experiencedata")) || [];
+}
+
+function renderExperienceList() {
   const experienceList = document.getElementById("experienceList");
+
   experienceList.innerHTML = ""; // Clear previous content
 
-  const localData = JSON.parse(localStorage.getItem("experiencedata")) || [];
+  const localData = fetchExperienceList();
   localData.forEach((singleExperience) => {
     const experienceEntry = document.createElement("div");
     experienceEntry.classList.add("experience-entry");
 
-    //edit entity start over  here
     const editButton = document.createElement("button");
     editButton.innerText = "edit";
     editButton.addEventListener("click", () =>
       editEntry(singleExperience, experienceEntry)
     );
 
-    //edit function end here
-
-    //delete entity here
-    const deleteButton = document.createElement("button"); // create a delete button and assign variable to the
-    deleteButton.innerText = "Delete"; // inner text is delete button inside the button
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "Delete";
     deleteButton.addEventListener("click", () =>
       deleteEntry(singleExperience.id)
     );
@@ -36,10 +36,8 @@ function fetchLocalStorageData() {
   });
 }
 
-//EDIT FUNCTION
 function editEntry(singleExperience, experienceEntry) {
   const form = document.createElement("form");
-  //form.className = "editJobExperience";
 
   const companyNameInput = document.createElement("input");
   companyNameInput.type = "text";
@@ -52,9 +50,6 @@ function editEntry(singleExperience, experienceEntry) {
   const endDateInput = document.createElement("input");
   endDateInput.type = "date";
   endDateInput.value = singleExperience.endDate;
-
-  const innerContainer = document.createElement("div");
-  //innerContainer.className = "jobDescription";
 
   const descriptionInput = document.createElement("textarea");
   descriptionInput.rows = 5;
@@ -78,13 +73,15 @@ function editEntry(singleExperience, experienceEntry) {
   form.appendChild(companyNameInput);
   form.appendChild(startDateInput);
   form.appendChild(endDateInput);
-  innerContainer.appendChild(descriptionInput);
-  innerContainer.appendChild(saveButton);
-  form.appendChild(innerContainer);
+  form.appendChild(descriptionInput);
+  form.appendChild(saveButton);
 
-  experienceEntry.replaceWith(form);
+  experienceEntry.innerHTML = ""; // Clear previous content
+  experienceEntry.appendChild(form);
 }
-//save button function
+
+//end here
+//save button
 function updateExperience(
   singleExperience,
   updatedCompanyName,
@@ -109,11 +106,10 @@ function updateExperience(
   experiences[index] = singleExperience;
   localStorage.setItem("experiencedata", JSON.stringify(experiences));
 
-  fetchLocalStorageData();
-  form.replaceWith(experienceEntry);
+  renderExperienceList(); // Update the list
 }
 
-//delete function start over here
+//delete button
 function deleteEntry(id) {
   let experiences = JSON.parse(localStorage.getItem("experiencedata"));
   const index = experiences.findIndex((experience) => experience.id === id);
@@ -121,10 +117,9 @@ function deleteEntry(id) {
     experiences.splice(index, 1);
     localStorage.setItem("experiencedata", JSON.stringify(experiences));
   }
-  fetchLocalStorageData();
+  renderExperienceList(); // Update the list
 }
-
-//delete function end here
+//delete button
 
 document.addEventListener("DOMContentLoaded", function () {
   const addButton = document.getElementById("addButton");
@@ -154,11 +149,11 @@ document.addEventListener("DOMContentLoaded", function () {
       description,
     };
 
-    const dataValue = JSON.parse(localStorage.getItem("experiencedata")) || [];
+    let dataValue = JSON.parse(localStorage.getItem("experiencedata")) || [];
     dataValue.push(experienceData);
     localStorage.setItem("experiencedata", JSON.stringify(dataValue));
 
-    fetchLocalStorageData();
+    renderExperienceList(); // Update the list with the new experience
 
     document.getElementById("companyName").value = "";
     document.getElementById("startDate").value = "";
@@ -167,10 +162,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     experienceForm.style.display = "none";
   });
-  fetchLocalStorageData(); // Call this function on initial load
+  //put function over here
+  renderExperienceList(); // Call this function on initial load
 });
+fetchExperienceList();
 
-// Search filter functionality
+// Search filter
 const searchInput = document.getElementById("searchInput"); // here we are get element by id that we mention up there
 searchInput.addEventListener("input", function () {
   // that input id we put function on that poarticular seaerch
