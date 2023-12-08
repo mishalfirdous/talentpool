@@ -3,31 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-      <div class="login">
+      <div class="navBar">
         <h3><a href="portfolio.html">Go Back</a></h3>
       </div>
     </header>
-  </head>
-  <body>
-    <div class="signup-container">
+
+    <div class="container">
       <form id="registrationForm">
         <h1>Registration form</h1>
-        <!--username feild -->
+        <!--username field -->
         <div class="input-control">
           <label for="name">User-name</label>
           <input id="name" name="name" type="text" />
           <span class="error" id="nameError"></span>
         </div>
-        <!--email feild -->
-
+        <!--email field -->
         <div class="input-control">
           <label for="email">User-email</label>
           <input id="email" name="email" type="email" />
           <span class="error" id="emailError"></span>
         </div>
-        <!--password feild -->
+        <!--password field -->
         <div class="input-control">
           <label for="password">Password</label>
           <input id="password" name="password" type="password" />
@@ -35,75 +35,18 @@
         </div>
         <button type="submit" id="submitBtn">submit</button>
         <div class="success-message" id="successMessage"></div>
+        <div id="registrationStatus" style="display: none">
+          Registration status show here
+        </div>
       </form>
     </div>
-
-    <footer class="linkedIn">
+    <footer class="socialAccount">
       <h3>
         <a href="https://www.linkedin.com/in/mishal-firdous-b99a0a131"
           >LinkedIn</a
         >
       </h3>
     </footer>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("registrationForm");
-        const nameInput = document.getElementById("name");
-        const emailInput = document.getElementById("email");
-        const passwordInput = document.getElementById("password");
-        const nameError = document.getElementById("nameError");
-        const emailError = document.getElementById("emailError");
-        const passwordError = document.getElementById("passwordError");
-        const successMessage = document.getElementById("successMessage");
-
-        form.addEventListener("submit", function (event) {
-          event.preventDefault();
-          let isValid = true;
-
-          // Name validation
-          if (nameInput.value.trim() === "") {
-            isValid = false;
-            nameError.textContent = "Name is required";
-            nameInput.style.borderColor = "red";
-          } else {
-            nameError.textContent = "";
-            nameInput.style.borderColor = "";
-          }
-
-          // Email validation
-          if (
-            emailInput.value.trim() === "" ||
-            !emailInput.value.includes("@")
-          ) {
-            isValid = false;
-            emailError.textContent = 'Email is required and must contain "@"';
-            emailInput.style.borderColor = "red";
-          } else {
-            emailError.textContent = "";
-            emailInput.style.borderColor = "";
-          }
-
-          // Password validation
-          if (
-            passwordInput.value.trim() === "" ||
-            passwordInput.value.length < 8
-          ) {
-            isValid = false;
-            passwordError.textContent =
-              "Password is required and must be at least 8 characters";
-            passwordInput.style.borderColor = "red";
-          } else {
-            passwordError.textContent = "";
-            passwordInput.style.borderColor = "";
-          }
-
-          if (isValid) {
-            successMessage.textContent = "Registration successful 🙂";
-          } else {
-            successMessage.textContent = "";
-          }
-        });
-      });
-    </script>
+    <script src="signup.js"></script>
   </body>
 </html>
