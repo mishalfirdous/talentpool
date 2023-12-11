@@ -248,3 +248,15 @@ form button:hover {
 #experienceForm {
   display: none;
 }
+table tr {
+  background-color: beige;
+  border: 2px solid black;
+}
+      #userTable th{
+          border: 2px solid black;
+          padding: 10px;
+          margin: 20px;
+      }
+      #tbody tr{
+          border: 2px solid black;
+      }
