@@ -39,7 +39,7 @@ ul li {
   text-align: left !important;
 }
 
-.form {
+#experienceForm {
   display: none;
   text-align: left;
   border: 1px solid #ccc;
@@ -57,6 +57,7 @@ ul li {
 }
 
 #experienceList {
+  width: 140%;
   padding: 20px;
 }
 .navBar {
@@ -146,11 +147,11 @@ ul li {
 .socialAccount a {
   text-decoration: none;
 }
-.form input {
+#experienceForm input {
   width: 25%;
   height: 30px;
 }
-.form textarea {
+#experienceForm textarea {
   width: 77%;
   height: 75px;
   margin-top: 20px;
@@ -211,4 +212,39 @@ table tr {
 }
 #tbody tr {
   border: 2px solid black;
+}
+.experience-entry {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+form {
+  margin-top: 0px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+form input,
+form textarea {
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+form button {
+  padding: 8px 15px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+form button:hover {
+  background-color: #45a049;
+}
+.experience-entry button {
+  position: relative;
+  left: 700px;
+  top: -170px;
+}
+#experienceForm {
+  display: none;
 }

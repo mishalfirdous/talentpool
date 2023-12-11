@@ -1,31 +1,31 @@
-//store data in local storage through this function
-function fetchLocalStorageData() {
+function fetchExperienceList() {
+  return JSON.parse(localStorage.getItem("experiencedata")) || [];
+}
+
+function renderExperienceList() {
   const experienceList = document.getElementById("experienceList");
+
   experienceList.innerHTML = ""; // Clear previous content
 
-  const localData = JSON.parse(localStorage.getItem("experiencedata")) || [];
+  const localData = fetchExperienceList();
   localData.forEach((singleExperience) => {
     const experienceEntry = document.createElement("div");
     experienceEntry.classList.add("experience-entry");
 
-    //edit entity start over  here
     const editButton = document.createElement("button");
     editButton.innerText = "edit";
     editButton.addEventListener("click", () =>
       editEntry(singleExperience, experienceEntry)
     );
 
-    //edit function end here
-
-    //delete entity here
-    const deleteButton = document.createElement("button"); // create a delete button and assign variable to the
-    deleteButton.innerText = "Delete"; // inner text is delete button inside the button
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "Delete";
     deleteButton.addEventListener("click", () =>
-      deleteEntry(singleExperience.id)
+      deleteExperience(singleExperience.id)
     );
 
     experienceEntry.innerHTML = `
-      <h2><strong>${singleExperience.companyName}</strong><br></h2>
+      <h2>${singleExperience.companyName}<br></h2>
       <p>${singleExperience.startDate} - ${singleExperience.endDate} </p>
       <p>${singleExperience.description}</p>     
     `;
@@ -36,10 +36,8 @@ function fetchLocalStorageData() {
   });
 }
 
-//EDIT FUNCTION
 function editEntry(singleExperience, experienceEntry) {
   const form = document.createElement("form");
-  //form.className = "editJobExperience";
 
   const companyNameInput = document.createElement("input");
   companyNameInput.type = "text";
@@ -53,17 +51,20 @@ function editEntry(singleExperience, experienceEntry) {
   endDateInput.type = "date";
   endDateInput.value = singleExperience.endDate;
 
-  const innerContainer = document.createElement("div");
-  //innerContainer.className = "jobDescription";
-
   const descriptionInput = document.createElement("textarea");
   descriptionInput.rows = 5;
   descriptionInput.value = singleExperience.description;
-
   const saveButton = document.createElement("button");
   saveButton.type = "submit";
   saveButton.innerHTML = "Save";
-  saveButton.onclick = (event) =>
+
+  // Add a class or identifier for this button to differentiate from other buttons if needed
+  saveButton.classList.add("save-button");
+
+  // Assuming there's a form referenced by the 'form' variable
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+
     updateExperience(
       singleExperience,
       companyNameInput.value,
@@ -75,16 +76,21 @@ function editEntry(singleExperience, experienceEntry) {
       event
     );
 
+    // Additional actions after processing form data, if needed
+  });
+
   form.appendChild(companyNameInput);
   form.appendChild(startDateInput);
   form.appendChild(endDateInput);
-  innerContainer.appendChild(descriptionInput);
-  innerContainer.appendChild(saveButton);
-  form.appendChild(innerContainer);
+  form.appendChild(descriptionInput);
+  form.appendChild(saveButton);
 
-  experienceEntry.replaceWith(form);
+  experienceEntry.innerHTML = ""; // Clear previous content
+  experienceEntry.appendChild(form);
 }
-//save button function
+
+//end here
+//save button
 function updateExperience(
   singleExperience,
   updatedCompanyName,
@@ -109,24 +115,23 @@ function updateExperience(
   experiences[index] = singleExperience;
   localStorage.setItem("experiencedata", JSON.stringify(experiences));
 
-  fetchLocalStorageData();
-  form.replaceWith(experienceEntry);
+  renderExperienceList(); // Update the list
 }
 
-//delete function start over here
-function deleteEntry(id) {
+//delete button
+function deleteExperience(id) {
   let experiences = JSON.parse(localStorage.getItem("experiencedata"));
-  const index = experiences.findIndex((experience) => experience.id === id);
-  if (index !== -1) {
-    experiences.splice(index, 1);
+  const deleteExperience = experiences.find(
+    (experience) => experience.id === id
+  );
+  if (deleteExperience) {
+    experiences = experiences.filter((experience) => experience.id !== id);
     localStorage.setItem("experiencedata", JSON.stringify(experiences));
   }
-  fetchLocalStorageData();
+  renderExperienceList(); // Update the list
+  return deleteExperience;
 }
-
-//delete function end here
-
-//here is the function we created on add button
+//delete button
 
 document.addEventListener("DOMContentLoaded", function () {
   const addButton = document.getElementById("addButton");
@@ -134,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const saveButton = document.getElementById("saveButton");
 
   addButton.addEventListener("click", function (event) {
-    event.preventDefault(); // it stop the default behaviour
+    event.preventDefault();
     experienceForm.style.display = "block";
   });
 
@@ -156,11 +161,11 @@ document.addEventListener("DOMContentLoaded", function () {
       description,
     };
 
-    const dataValue = JSON.parse(localStorage.getItem("experiencedata")) || [];
+    let dataValue = JSON.parse(localStorage.getItem("experiencedata")) || [];
     dataValue.push(experienceData);
     localStorage.setItem("experiencedata", JSON.stringify(dataValue));
 
-    fetchLocalStorageData();
+    renderExperienceList(); // Update the list with the new experience
 
     document.getElementById("companyName").value = "";
     document.getElementById("startDate").value = "";
@@ -169,10 +174,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     experienceForm.style.display = "none";
   });
-  fetchLocalStorageData(); // Call this function on initial load
+  //put function over here
+  renderExperienceList(); // Call this function on initial load
 });
+fetchExperienceList();
+renderExperienceList();
 
-// Search filter functionality
+// Search filter
 const searchInput = document.getElementById("searchInput"); // here we are get element by id that we mention up there
 searchInput.addEventListener("input", function () {
   // that input id we put function on that poarticular seaerch
@@ -180,7 +188,7 @@ searchInput.addEventListener("input", function () {
   const experienceEntries = document.querySelectorAll(".experience-entry");
 
   experienceEntries.forEach((entry) => {
-    const companyName = entry.querySelector("strong").textContent.toLowerCase();
+    const companyName = entry.querySelector("h2").textContent.toLowerCase();
     if (companyName.includes(filterValue)) {
       entry.style.display = "block"; // Show if matches the search criteria
     } else {
