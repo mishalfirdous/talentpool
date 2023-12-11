@@ -220,6 +220,8 @@ table tr {
 }
 form {
   margin-top: 0px;
+=======
+  margin-top: 10px;
   border: 1px solid #ccc;
   padding: 10px;
 }
