@@ -52,6 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       // Simulate API call
+      simulateAPI(userData); // check false or true.
+    } else {
+      successMessage.textContent = ""; // no validation it will clear the message
       simulateAPI(userData);
     } else {
       successMessage.textContent = "";
@@ -73,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (response.status === 200) {
       registrationStatus.textContent = "Registration successful";
       registrationStatus.style.display = "block";
+      console.log(userData);
     } else {
       registrationStatus.textContent = "Registration failed";
       registrationStatus.style.display = "block";
