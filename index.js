@@ -1,6 +1,6 @@
 function fetchExperienceList() {
   return JSON.parse(localStorage.getItem("experiencedata")) || [];
-}//retrive data from the localstorage 
+} //retrive data from the localstorage
 
 function renderExperienceList() {
   const experienceList = document.getElementById("experienceList");
@@ -26,11 +26,6 @@ function renderExperienceList() {
 
     experienceEntry.innerHTML = `
       <h2>${singleExperience.companyName}<br></h2>
-      deleteEntry(singleExperience.id)
-    );
-
-    experienceEntry.innerHTML = `
-      <h2><strong>${singleExperience.companyName}</strong><br></h2>
       <p>${singleExperience.startDate} - ${singleExperience.endDate} </p>
       <p>${singleExperience.description}</p>     
     `;
@@ -70,10 +65,6 @@ function editEntry(singleExperience, experienceEntry) {
   form.addEventListener("submit", (event) => {
     event.preventDefault(); // Prevent default form submission behavior
 
-  const saveButton = document.createElement("button");
-  saveButton.type = "submit";
-  saveButton.innerHTML = "Save";
-  saveButton.onclick = (event) =>
     updateExperience(
       singleExperience,
       companyNameInput.value,
@@ -84,8 +75,10 @@ function editEntry(singleExperience, experienceEntry) {
       experienceEntry,
       event
     );
+
     // Additional actions after processing form data, if needed
   });
+
   form.appendChild(companyNameInput);
   form.appendChild(startDateInput);
   form.appendChild(endDateInput);
@@ -137,14 +130,6 @@ function deleteExperience(id) {
   }
   renderExperienceList(); // Update the list
   return deleteExperience;
-function deleteEntry(id) {
-  let experiences = JSON.parse(localStorage.getItem("experiencedata"));
-  const index = experiences.findIndex((experience) => experience.id === id);
-  if (index !== -1) {
-    experiences.splice(index, 1);
-    localStorage.setItem("experiencedata", JSON.stringify(experiences));
-  }
-  renderExperienceList(); // Update the list
 }
 //delete button
 
@@ -204,7 +189,6 @@ searchInput.addEventListener("input", function () {
 
   experienceEntries.forEach((entry) => {
     const companyName = entry.querySelector("h2").textContent.toLowerCase();
-    const companyName = entry.querySelector("strong").textContent.toLowerCase();
     if (companyName.includes(filterValue)) {
       entry.style.display = "block"; // Show if matches the search criteria
     } else {

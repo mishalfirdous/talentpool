@@ -55,9 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
       simulateAPI(userData); // check false or true.
     } else {
       successMessage.textContent = ""; // no validation it will clear the message
-      simulateAPI(userData);
-    } else {
-      successMessage.textContent = "";
     }
   });
 
