@@ -73,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (response.status === 200) {
       registrationStatus.textContent = "Registration successful";
       registrationStatus.style.display = "block";
-      console.log(userData);
     } else {
       registrationStatus.textContent = "Registration failed";
       registrationStatus.style.display = "block";

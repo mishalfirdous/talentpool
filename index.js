@@ -1,6 +1,6 @@
 function fetchExperienceList() {
   return JSON.parse(localStorage.getItem("experiencedata")) || [];
-}
+}//retrive data from the localstorage 
 
 function renderExperienceList() {
   const experienceList = document.getElementById("experienceList");
