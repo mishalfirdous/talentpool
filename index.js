@@ -26,11 +26,6 @@ function renderExperienceList() {
 
     experienceEntry.innerHTML = `
       <h2>${singleExperience.companyName}<br></h2>
-      deleteEntry(singleExperience.id)
-    );
-
-    experienceEntry.innerHTML = `
-      <h2>${singleExperience.companyName}<br></h2>
       <p>${singleExperience.startDate} - ${singleExperience.endDate} </p>
       <p>${singleExperience.description}</p>     
     `;
@@ -69,16 +64,6 @@ function editEntry(singleExperience, experienceEntry) {
   // Assuming there's a form referenced by the 'form' variable
   form.addEventListener("submit", (event) => {
     event.preventDefault(); // Prevent default form submission behavior
-  const saveButton = document.createElement("button");
-  saveButton.type = "submit";
-  saveButton.innerHTML = "Save";
-
-  // Add a class or identifier for this button to differentiate from other buttons if needed
-  saveButton.classList.add("save-button");
-
-  // Assuming there's a form referenced by the 'form' variable
-  form.addEventListener("submit", (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
 
     updateExperience(
       singleExperience,
@@ -90,10 +75,10 @@ function editEntry(singleExperience, experienceEntry) {
       experienceEntry,
       event
     );
-// Additional actions after processing form data, if needed
-  });
+
     // Additional actions after processing form data, if needed
   });
+
   form.appendChild(companyNameInput);
   form.appendChild(startDateInput);
   form.appendChild(endDateInput);
@@ -135,17 +120,6 @@ function updateExperience(
 
 //delete button
 function deleteExperience(id) {
-  let experiences = JSON.parse(localStorage.getItem("experiencedata"));
-  const deleteExperience = experiences.find(
-    (experience) => experience.id === id
-  );
-  if (deleteExperience) {
-    experiences = experiences.filter((experience) => experience.id !== id);
-    localStorage.setItem("experiencedata", JSON.stringify(experiences));
-  }
-  renderExperienceList(); // Update the list
-  return deleteExperience;
-function deleteEntry(id) {
   let experiences = JSON.parse(localStorage.getItem("experiencedata"));
   const deleteExperience = experiences.find(
     (experience) => experience.id === id
@@ -215,7 +189,6 @@ searchInput.addEventListener("input", function () {
 
   experienceEntries.forEach((entry) => {
     const companyName = entry.querySelector("h2").textContent.toLowerCase();
-    const companyName = entry.querySelector("strong").textContent.toLowerCase();
     if (companyName.includes(filterValue)) {
       entry.style.display = "block"; // Show if matches the search criteria
     } else {
