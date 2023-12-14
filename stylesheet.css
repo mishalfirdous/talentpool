@@ -220,8 +220,6 @@ table tr {
 }
 form {
   margin-top: 0px;
-=======
-  margin-top: 10px;
   border: 1px solid #ccc;
   padding: 10px;
 }
@@ -249,4 +247,16 @@ form button:hover {
 }
 #experienceForm {
   display: none;
+}
+table tr {
+  background-color: beige;
+  border: 2px solid black;
+}
+#userTable th {
+  border: 2px solid black;
+  padding: 10px;
+  margin: 20px;
+}
+#tbody tr {
+  border: 2px solid black;
 }

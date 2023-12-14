@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheet.css" />
+    <title>fetch data assignment </title>
+  </head>
+  <body onload="getData()">
+    <header>
+        <nav class="navBar">
+          <ul>
+            <li><a href="signup.html">login</a></li>
+            <li><a href="portfolio.html">portfolio</a></li>
+            <li><a href="viewpage.html">View Page</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="container mt-5 mb-5">
+      <table class="table table-striped" id="userTable">
+        <thead>
+          <th>firstName</th>
+          <th>lastName</th>
+          <th>Age</th>
+          <th>Area</th>
+          <th>Gender</th>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <footer class="socialAccount">
+        <h3>
+          <a href="https://www.linkedin.com/in/mishal-firdous-b99a0a131"
+            >LinkedIn</a
+          >
+        </h3>
+      </footer>
+    <script src="getData.js"></script>
+  </body>
+</html>
