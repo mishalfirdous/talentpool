@@ -1,5 +1,5 @@
-async function getData() {
-  const data = await fetch("https://dummyjson.com/users");
+async function getData() {// creating function over here 
+  const data = await fetch("https://dummyjson.com/users");// dummy 
   const records = await data.json();
   let tab = "";
   records.users.forEach(function (user) {

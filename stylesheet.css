@@ -1,3 +1,4 @@
+
 header {
   display: flex;
   padding: 10px;
@@ -70,6 +71,7 @@ ul li {
   border: none;
   font-size: 20px;
 }
+
 .main-container {
   width: 100%;
   display: flex;
@@ -259,4 +261,42 @@ table tr {
 }
 #tbody tr {
   border: 2px solid black;
+}
+
+@media only screen and (min-width:300px) and (max-width:600px){
+
+  #addButton {
+    left: 4%;
+  }
+  .experience-entry button {
+    left: 178px;
+    top: -289px;
+}
+.navBar ul {
+  padding-left: 0px;
+}
+.navBar ul li {
+  padding: 3px;
+  padding-left: 0px;
+}
+  
+}
+
+@media only screen and (min-width:601px) and (max-width:1024px){
+  #addButton {
+    left: 10%;
+  }
+  
+
+
+}
+
+@media only screen and(max-width:1441px){
+  #addButton {
+    left: 10%;
+  }
+  .experience-entry button {
+      left: 178px;
+      top: -289px;
+}
 }

@@ -1,0 +1,120 @@
+/*@media only screen and (min-width:300px) and (max-width:600px) {
+    header{
+        background-color: aquamarine;
+        flex-direction: column;
+    }
+
+    .main-container {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+      }
+
+      .side-bar {
+        width: 100%;
+        height: 500px;
+      }
+
+      .side-bar ul li{
+        display: block;
+        padding: 3px;
+        padding-top: 15px;
+      }
+      .personal-info{
+        width: 100%;
+      }
+      .about-info p, h2 {
+        font-size: 13px;
+      }
+      .navBar ul li {
+        padding: 3px;
+        padding-left: 0px;
+      }
+      .avatar img{
+        width: 228px;
+    }
+    .experience-entry button{
+        left: 356px;
+        top: -247px;
+    }
+    .about-info{
+        height: 300px;
+    }
+    .navBar ul {
+        padding-left: 0px;
+      }
+    
+}
+*/
+@media only screen and (min-width:601px) and (max-width:1024px){
+    .body{
+        overflow: hidden;
+    }
+    .avatar img{
+        width: 143px;
+    }
+    .avatar h2 {
+        font-size: 17px;
+    }
+    .avatar ul{
+        padding: 0;
+    }
+    .about-info p, h2 {
+        font-size: 12px;
+    }
+    #file{
+        width: 100%;
+    }
+    .experience-entry button {
+        left: 351px;
+        top: -239px;
+    }
+}
+/*view data page */
+@media only screen and (max-width: 600px) {
+  header{
+    background-color: aquamarine;
+    flex-direction: column;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .side-bar {
+    width: 100%;
+    height: 500px;
+  }
+
+  .side-bar ul li{
+    display: block;
+    padding: 3px;
+    padding-top: 15px;
+  }
+  .personal-info{
+    width: 100%;
+  }
+  .about-info p, h2 {
+    font-size: 13px;
+  }
+  .navBar ul li {
+    padding: 3px;
+    padding-left: 0px;
+  }
+  .avatar img{
+    width: 228px;
+}
+.experience-entry button{
+    left: 356px;
+    top: -247px;
+}
+.about-info{
+    height: 300px;
+}
+.navBar ul {
+    padding-left: 0px;
+  }
+
+}
