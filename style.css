@@ -91,21 +91,19 @@ label {
   color: black;
 }
 
-@media only screen and (max-width:600px){
+@media only screen and (max-width: 600px) {
   #registrationForm {
     width: 70%;
   }
-
 }
 
-@media only screen and (min-width:601px) and (max-width:1024px) {
-
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
   #registrationForm {
     width: 43%;
   }
 }
 
-@media only screen and (min-width:1025px){
+@media only screen and (min-width: 1025px) {
   #registrationForm {
     width: 30%;
   }
